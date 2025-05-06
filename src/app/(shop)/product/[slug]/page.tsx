@@ -6,12 +6,10 @@ import { ProductMobileSlideshow, ProductSlideshow, QuantitySelector, SizeSelecto
 
 
 interface Props {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug?: string }>;
 }
-const page = ({ params }: Props) => {
-  const { slug } = params;
+const page = async ({ params }: Props) => {
+  const { slug } = await params;
   const product = initialData.products.find((product) => product.slug === slug);
 
   if (!product) {
