@@ -22,9 +22,7 @@ export async function generateMetadata(
   { params }: Props,
 ): Promise<Metadata> {
   // read route params
-  const slug = params.slug;
-
-  // fetch data
+	const { slug } = await params;
   const product = await getProductBySlug(slug);
 
   // optionally access and extend (rather than replace) parent metadata
@@ -43,7 +41,8 @@ export async function generateMetadata(
 }
 
 export default async function ProductBySlugPage({ params }: Props) {
-  const { slug } = params;
+  
+	const { slug } = await params;
   const product = await getProductBySlug(slug);
   
 
