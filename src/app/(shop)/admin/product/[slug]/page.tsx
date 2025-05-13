@@ -4,9 +4,7 @@ import { redirect } from "next/navigation";
 import { ProductForm } from "./ui/ProductForm";
 
 interface Props {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
 }
 
 export default async function ProductPage({ params }: Props) {
@@ -17,7 +15,7 @@ export default async function ProductPage({ params }: Props) {
     getCategories(),
   ]);
 
-  // Todo: new
+  // Si no existe y no es "new", redirige
   if (!product && slug !== "new") {
     redirect("/admin/products");
   }
@@ -27,7 +25,6 @@ export default async function ProductPage({ params }: Props) {
   return (
     <>
       <Title title={title} />
-
       <ProductForm product={product ?? {}} categories={categories} />
     </>
   );

@@ -35,6 +35,7 @@ export const authConfig: NextAuthConfig = {
     },
 
     session({ session, token/* , user */ }) {
+			// eslint-disable-next-line 
       session.user = token.data as any;
       return session;
     },
@@ -61,6 +62,7 @@ export const authConfig: NextAuthConfig = {
         if (!bcryptjs.compareSync(password, user.password)) return null;
 
         // Regresar el usuario sin el password
+				// eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { password: _, ...rest } = user;
 
         return rest;
